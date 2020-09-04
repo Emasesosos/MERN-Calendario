@@ -38,7 +38,7 @@ export const RegisterScreen = () => {
                             />
                         </div>
 
-                        <div className="form-group">
+                        <div className="form-group btn-auth">
                             <input 
                                 type="submit" 
                                 className="btnSubmit" 
@@ -48,9 +48,9 @@ export const RegisterScreen = () => {
                         <Link 
                             // to="/auth/login"
                             to="/login"
-                            className="link"
+                            className="btnSubmit btn-auth"
                         >
-                            Already Register?
+                            ¿Ya tienes cuenta?
                         </Link>
 
                     </form>

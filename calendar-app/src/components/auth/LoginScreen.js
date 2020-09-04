@@ -23,7 +23,7 @@ export const LoginScreen = () => {
                                 placeholder="Contraseña"
                             />
                         </div>
-                        <div className="form-group">
+                        <div className="form-group btn-auth">
                             <input 
                                 type="submit"
                                 className="btnSubmit"
@@ -34,9 +34,9 @@ export const LoginScreen = () => {
                         <Link 
                             // to="/auth/register"
                             to="/register"
-                            className="btnSubmit"
+                            className="btnSubmit btn-auth"
                         >
-                            Create New Account
+                            Crear Nueva Cuenta
                         </Link>
 
                     </form>
