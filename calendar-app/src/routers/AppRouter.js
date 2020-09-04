@@ -5,9 +5,9 @@ import {
     Route,
     Redirect
 } from "react-router-dom";
-import { PublicRoute } from './PublicRoute';
-import { PrivateRoute } from './PrivateRoute';
-import { AuthRouter } from './AuthRouter';
+// import { PublicRoute } from './PublicRoute';
+// import { PrivateRoute } from './PrivateRoute';
+// import { AuthRouter } from './AuthRouter';
 import { CalendarScreen } from '../components/calendar/CalendarScreen';
 import { RegisterScreen } from '../components/auth/RegisterScreen';
 import { LoginScreen } from '../components/auth/LoginScreen';
