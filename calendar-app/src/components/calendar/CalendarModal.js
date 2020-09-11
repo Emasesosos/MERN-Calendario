@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import Modal from 'react-modal';
 import DateTimePicker from 'react-datetime-picker';
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
 import { uiCloseModal } from '../../redux/actions/ui';
-import { eventAddNew } from '../../redux/actions/events';
+import { eventAddNew, eventClearActiveEvent } from '../../redux/actions/events';
 
 const customStyles = {
     content : {
@@ -22,12 +22,19 @@ Modal.setAppElement('#root');
 const now = moment().minutes(0).seconds(0).add(1, 'hours');
 const nowPlus1 = now.clone().add(1, 'hours');
 
+const initEvent = {
+    title: '',
+    notes: '',
+    start: now.toDate(),
+    end: nowPlus1.toDate()
+};
+
 export const CalendarModal = () => {
 
-    const dispatch = useDispatch();
+    const { modalOpen } = useSelector(state => state.ui);
+    const { activeEvent } = useSelector(state => state.calendar);
 
-    const state = useSelector(state => state.ui);
-    const { modalOpen } = state;
+    const dispatch = useDispatch();
 
     const initialStateStart = now.toDate();
     const [dateStart, setDateStart] = useState(initialStateStart);
@@ -36,16 +43,16 @@ export const CalendarModal = () => {
     const [dateEnd, setDateEnd] = useState(initialStateEnd);
 
     const [titleValid, setTitleValid] = useState(true);
-
-    const initialStateForm = {
-        title: 'Evento',
-        notes: '',
-        start: now.toDate(),
-        end: nowPlus1.toDate()
-    };
-    const [formValues, setFormValues] = useState(initialStateForm);
+    
+    const [formValues, setFormValues] = useState(initEvent);
 
     const { title, notes, start, end } = formValues;
+
+    useEffect(() => {
+        if(activeEvent) {
+            setFormValues(activeEvent);
+        }
+    }, [activeEvent]);
 
     const handleInputChange = ({ target }) => {
         setFormValues({
@@ -58,6 +65,8 @@ export const CalendarModal = () => {
         console.log('Closing...');
         // TODO de cerrar Modal
         dispatch(uiCloseModal());
+        dispatch(eventClearActiveEvent());
+        setFormValues(initEvent);
         
     };
 

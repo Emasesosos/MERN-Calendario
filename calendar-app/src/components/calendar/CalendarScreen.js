@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import { Navbar } from '../ui/Navbar';
@@ -16,21 +16,23 @@ moment.locale('es');
 
 const localizer = momentLocalizer(moment); 
 
-const events = [{
-    title: 'Cumpleaños del Jefe',
-    start: moment().toDate(),
-    end: moment().add(2, 'hours').toDate(),
-    bgcolor: '#fafafa',
-    notes: 'Comprar el pastel',
-    user: {
-        _id: '123',
-        name: 'Emmanuel',
-    }
-}];
+// const events = [{
+//     title: 'Cumpleaños del Jefe',
+//     start: moment().toDate(),
+//     end: moment().add(2, 'hours').toDate(),
+//     bgcolor: '#fafafa',
+//     notes: 'Comprar el pastel',
+//     user: {
+//         _id: '123',
+//         name: 'Emmanuel',
+//     }
+// }];
 
 export const CalendarScreen = () => {
 
     const dispatch = useDispatch();
+    const state = useSelector(state => state.calendar);
+    const { events } = state;
 
     const initialState = localStorage.getItem('lastView') || 'month';
     const [lastView, setLastView] = useState(initialState);
@@ -43,7 +45,6 @@ export const CalendarScreen = () => {
 
     const onSelectEvent = (e) => {
         dispatch(eventSetActive(e));
-        dispatch(uiOpenModal());
     };
 
     const onViewChange = (e) => {

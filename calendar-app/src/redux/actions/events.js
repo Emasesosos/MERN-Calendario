@@ -17,3 +17,10 @@ export const eventSetActive = (event) => {
         payload: event
     };
 };
+
+// Limpiar Nota Activa
+export const eventClearActiveEvent = () => {
+    return {
+        type: types.eventClearActiveEvent,
+    };
+};
