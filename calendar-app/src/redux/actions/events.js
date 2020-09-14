@@ -24,3 +24,11 @@ export const eventClearActiveEvent = () => {
         type: types.eventClearActiveEvent,
     };
 };
+
+// Actualizar Nota
+export const eventUpdated = (event) => {
+    return {
+        type: types.eventUpdated,
+        payload: event
+    }
+};
