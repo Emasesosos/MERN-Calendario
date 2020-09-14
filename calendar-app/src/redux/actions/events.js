@@ -32,3 +32,11 @@ export const eventUpdated = (event) => {
         payload: event
     }
 };
+
+// Eliminar Nota
+export const eventDeleted = () => {
+    return {
+        type: types.eventDeleted,
+    }
+
+};
