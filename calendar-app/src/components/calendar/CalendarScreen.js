@@ -39,8 +39,8 @@ export const CalendarScreen = () => {
     const [lastView, setLastView] = useState(initialState);
 
     const onDoubleClick = (e) => {
-        console.log(e);
-        console.log('Abrir Modal');
+        // console.log(e);
+        // console.log('Abrir Modal');
         dispatch(uiOpenModal());
     };
 
@@ -49,7 +49,7 @@ export const CalendarScreen = () => {
     };
 
     const onViewChange = (e) => {
-        console.log(e);
+        // console.log(e);
         setLastView(e);
         localStorage.setItem('lastView', e);
     };
