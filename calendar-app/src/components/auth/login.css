@@ -42,6 +42,7 @@
     padding: 1.5%;
     border: none;
     cursor: pointer;
+    outline: none;
 }
 
 .login-form-1 .btnSubmit {

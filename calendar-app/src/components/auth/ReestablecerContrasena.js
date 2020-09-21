@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './login.css';
 
 export const ReestablecerContrasena = () => {
@@ -20,7 +19,7 @@ export const ReestablecerContrasena = () => {
                             <input
                                 type="password"
                                 className="form-control"
-                                placeholder="Contraseña" 
+                                placeholder="Nueva Contraseña" 
                             />
                         </div>
 
@@ -28,7 +27,7 @@ export const ReestablecerContrasena = () => {
                             <input
                                 type="password"
                                 className="form-control"
-                                placeholder="Repita la contraseña" 
+                                placeholder="Repita la Contraseña" 
                             />
                         </div>
 
@@ -38,14 +37,6 @@ export const ReestablecerContrasena = () => {
                                 className="btnSubmit" 
                                 value="Cambiar Contraseña" />
                         </div>
-
-                        <Link 
-                            // to="/auth/login"
-                            to="/login"
-                            className="btnSubmit btn-auth"
-                        >
-                            ¿Ya tienes cuenta?
-                        </Link>
 
                     </form>
                 </div>
