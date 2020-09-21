@@ -11,6 +11,7 @@ import {
 import { CalendarScreen } from '../components/calendar/CalendarScreen';
 import { RegisterScreen } from '../components/auth/RegisterScreen';
 import { LoginScreen } from '../components/auth/LoginScreen';
+import { ReestablecerContrasena } from '../components/auth/ReestablecerContrasena';
 
 export const AppRouter = () => {
     return (
@@ -20,6 +21,7 @@ export const AppRouter = () => {
 
                     <Route exact path="/login" component={ LoginScreen } />
                     <Route exact path="/register" component={ RegisterScreen } />
+                    <Route exact path="/restablish" component={ ReestablecerContrasena } />
                     <Route exact path="/" component={ CalendarScreen } />
                     <Redirect to="/" />
 

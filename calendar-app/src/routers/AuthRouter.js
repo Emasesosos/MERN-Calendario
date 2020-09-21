@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { LoginScreen } from '../components/auth/LoginScreen';
+import { ReestablecerContrasena } from '../components/auth/ReestablecerContrasena';
 import { RegisterScreen } from '../components/auth/RegisterScreen';
 
 
@@ -20,6 +21,12 @@ export const AuthRouter = () => {
                         exact 
                         path="/auth/register"
                         component={ RegisterScreen }
+                    />
+
+                    <Route 
+                        exact 
+                        path="/auth/restablish"
+                        component={ ReestablecerContrasena }
                     />
 
                     <Redirect to="/auth/login" />
