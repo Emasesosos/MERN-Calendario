@@ -42,6 +42,14 @@ export const startRegister = (name, email, password) => {
         if (body.ok) {
             localStorage.setItem('token', body.token);
             localStorage.setItem('token-init-date', new Date().getTime());
+            const sendCorreo = await fetchCorreo('auth/send-mail', { email }, 'POST');
+            const bodyCorreo = await sendCorreo.json();
+            console.log(bodyCorreo);
+            Swal.fire({
+                icon: 'success',
+                title: 'Se creó nuevo Usuario',
+                text: bodyCorreo.msg
+            });
             dispatch(login({
                 uid: body.uid,
                 name: body.name
@@ -74,7 +82,7 @@ export const startRestablishPass = (email, password) => {
                 icon: 'success',
                 title: body.msg,
                 text: bodyCorreo.msg
-              })
+            });
             dispatch(login({
                 uid: body.uid,
                 name: body.name
