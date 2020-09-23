@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-import { fetchSinToken, fetchCorreo } from "../../helpers/fetch";
+import { fetchSinToken, fetchCorreo, fetchConToken } from "../../helpers/fetch";
 import { types } from "../types/types";
 
 /* ***** Acciones de Auth: Usuario ***** */
@@ -9,10 +9,10 @@ export const startLogin = (email, password) => {
 
     return async(dispatch) => { // Thunk
 
-        console.log(email, password);
+        // console.log(email, password);
         const resp = await fetchSinToken('auth', { email, password }, 'POST');
         const body = await resp.json();
-        console.log(body);
+        // console.log(body);
 
         if (body.ok) {
             localStorage.setItem('token', body.token);
@@ -34,17 +34,17 @@ export const startRegister = (name, email, password) => {
 
     return async(dispatch) => { // Thunk
         
-        console.log(name, email, password);
+        // console.log(name, email, password);
         const resp = await fetchSinToken('auth/new', { name, email, password }, 'POST');
         const body = await resp.json();
-        console.log(body);
+        // console.log(body);
 
         if (body.ok) {
             localStorage.setItem('token', body.token);
             localStorage.setItem('token-init-date', new Date().getTime());
             const sendCorreo = await fetchCorreo('auth/send-mail', { email }, 'POST');
             const bodyCorreo = await sendCorreo.json();
-            console.log(bodyCorreo);
+            // console.log(bodyCorreo);
             Swal.fire({
                 icon: 'success',
                 title: 'Se creó nuevo Usuario',
@@ -67,17 +67,17 @@ export const startRestablishPass = (email, password) => {
 
     return async(dispatch) => { // Thunk
         
-        console.log(email, password);
+        // console.log(email, password);
         const resp = await fetchSinToken('auth/restablish-pass', { email, password }, 'PUT');
         const body = await resp.json();
-        console.log(body);
+        // console.log(body);
 
         if (body.ok) {
             localStorage.setItem('token', body.token);
             localStorage.setItem('token-init-date', new Date().getTime());
             const sendCorreo = await fetchCorreo('auth/resend-mail', { email }, 'POST');
             const bodyCorreo = await sendCorreo.json();
-            console.log(bodyCorreo);
+            // console.log(bodyCorreo);
             Swal.fire({
                 icon: 'success',
                 title: body.msg,
@@ -91,6 +91,39 @@ export const startRestablishPass = (email, password) => {
             Swal.fire('Error', body.msg, 'error');
         }
 
+    };
+
+};
+
+// Start Checking
+export const startChecking = () => {
+
+    return async(dispatch) => {
+
+        const resp = await fetchConToken('auth/renew');
+        const body = await resp.json();
+        console.log(body);
+
+        if (body.ok) {
+            localStorage.setItem('token', body.token);
+            localStorage.setItem('token-init-date', new Date().getTime());
+            dispatch(login({
+                uid: body.uid,
+                name: body.name
+            }));
+        } else {
+            Swal.fire('Error', body.msg, 'error');
+            dispatch(checkingFinish());
+        }
+
+    };
+
+};
+
+const checkingFinish = () => {
+
+    return {
+        type: types.authCheckingFinish
     };
 
 };
