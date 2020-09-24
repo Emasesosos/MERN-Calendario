@@ -61,16 +61,16 @@ export const LoginScreen = () => {
                         </div>
 
                         <Link 
-                            // to="/auth/register"
-                            to="/register"
+                            to="/auth/register"
+                            // to="/register"
                             className="btnSubmit btn-auth"
                         >
                             Crear Nueva Cuenta
                         </Link>
 
                         <Link 
-                            // to="/auth/register"
-                            to="/restablish"
+                            to="/auth/restablish"
+                            // to="/restablish"
                             className="btnSubmit btn-auth mt-3"
                         >
                             ¿Olvidaste tu Contraseña?
