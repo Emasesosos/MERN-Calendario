@@ -45,7 +45,6 @@ export const AppRouter = () => {
                     */}
                     
                     <PublicRoute 
-                        exact
                         path="/auth" 
                         component={ AuthRouter }
                         isAuthenticated={ !!uid }
