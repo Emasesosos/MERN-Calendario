@@ -5,7 +5,7 @@ import DateTimePicker from 'react-datetime-picker';
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
 import { uiCloseModal } from '../../redux/actions/ui';
-import { eventAddNew, eventClearActiveEvent, eventUpdated } from '../../redux/actions/events';
+import { eventClearActiveEvent, eventStartAddNew, eventUpdated } from '../../redux/actions/events'; // eventAddNew,
 
 const customStyles = {
     content : {
@@ -109,7 +109,11 @@ export const CalendarModal = () => {
         if(activeEvent) {
             dispatch(eventUpdated(formValues));
         } else {
-            dispatch(eventAddNew({
+            dispatch(eventStartAddNew({
+                ...formValues
+            }));
+            /* Desarrollo
+            dispatch(eventStartAddNew({
                 ...formValues,
                 id: new Date().getTime(),
                 user: {
@@ -117,6 +121,7 @@ export const CalendarModal = () => {
                     name: "Casandra",
                 }
             }));
+            */
         }
         
         setTitleValid(true);
