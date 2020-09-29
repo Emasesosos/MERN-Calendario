@@ -84,12 +84,35 @@ const eventUpdated = (event) => {
     }
 };
 
-// Eliminar Nota
-export const eventDeleted = () => {
+// Eliminar Nota BD
+export const eventStartDelete = () => {
+
+    return async(dispatch, getState) => {
+
+        const { id } = getState().calendar.activeEvent;
+
+        try {
+            const resp = await fetchConToken(`events/${ id }`, {}, 'DELETE');
+            const body = await resp.json();
+            // console.log(body);
+            if (body.ok) {
+                dispatch(eventDeleted());
+            } else {
+                Swal.fire('Error', body.msg, 'error');
+            }
+
+        } catch (error) {
+            throw error;
+        }
+    };
+
+};
+
+// Eliminar Nota state
+const eventDeleted = () => {
     return {
         type: types.eventDeleted,
-    }
-
+    };
 };
 
 // Cargar Eventos de la BD
@@ -122,6 +145,15 @@ const eventLoaded = (events) => {
     return {
         type: types.eventLoaded,
         payload: events
+    };
+
+};
+
+// Event Logout
+export const eventLogout = () => {
+
+    return {
+        type: types.eventLogout
     };
 
 };

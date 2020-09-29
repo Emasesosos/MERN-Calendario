@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import { fetchSinToken, fetchConToken } from "../../helpers/fetch"; // fetchCorreo,
 import { types } from "../types/types";
+import { eventLogout } from "./events";
 
 /* ***** Acciones de Auth: Usuario ***** */
 
@@ -143,6 +144,7 @@ export const startLogout = () => {
 
     return (dispatch) => {
         localStorage.clear();
+        dispatch(eventLogout());
         dispatch(logout());
     };
 
