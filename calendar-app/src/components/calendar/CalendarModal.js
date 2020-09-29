@@ -5,7 +5,7 @@ import DateTimePicker from 'react-datetime-picker';
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
 import { uiCloseModal } from '../../redux/actions/ui';
-import { eventClearActiveEvent, eventStartAddNew, eventUpdated } from '../../redux/actions/events'; // eventAddNew,
+import { eventClearActiveEvent, eventStartAddNew, eventStartUpdate } from '../../redux/actions/events'; // eventAddNew, eventUpdated
 
 const customStyles = {
     content : {
@@ -107,7 +107,8 @@ export const CalendarModal = () => {
 
         // TODO realizar grabación o actualización
         if(activeEvent) {
-            dispatch(eventUpdated(formValues));
+            // dispatch(eventUpdated(formValues)); // Desarrollo
+            dispatch(eventStartUpdate(formValues)); // Frontend y Backend integrado
         } else {
             dispatch(eventStartAddNew({
                 ...formValues
