@@ -1,7 +1,9 @@
 import '@testing-library/jest-dom';
-import { fetchSinToken } from '../../helpers/fetch';
+import { fetchConToken, fetchSinToken } from '../../helpers/fetch';
 
-describe('Pruenas en el helper Fetch', () => {
+describe('Pruebas en el helper Fetch', () => {
+
+    let token = '';
 
     test('fetchSinToken debe de funcionar', async() => {
         
@@ -10,6 +12,20 @@ describe('Pruenas en el helper Fetch', () => {
 
         const body = await resp.json();
         expect(body.ok).toBe(true);
+
+        token = body.token;
+
+    });
+
+    test('fetchConToken debe de funcionar', async() => {
+        
+       //  console.log(token);
+       localStorage.setItem('token', token);
+       const resp = await fetchConToken('events/5ee25d21c25cce32af01a3f3', {}, 'DELETE');
+       const body = await resp.json();
+       // console.log(body);
+
+       expect(body.msg).toBe('Evento no existe por ese id');
 
     });
     
