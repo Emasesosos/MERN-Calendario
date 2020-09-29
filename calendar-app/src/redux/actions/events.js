@@ -70,3 +70,36 @@ export const eventDeleted = () => {
     }
 
 };
+
+// Cargar Eventos de la BD
+export const eventStartLoaded = () => {
+
+    return async(dispatch) => {
+
+        try {
+
+            const resp = await fetchConToken('events');
+            const body = await resp.json();
+            console.log(body);
+            if (!body.ok) throw new Error('No se pudo realizar la petición');
+
+            const events = body.eventos;
+            dispatch(eventLoaded(events));
+
+        } catch (error) {
+            throw error;
+        }
+
+    };
+
+};
+
+// Cargar eventos en el State
+const eventLoaded = (events) => {
+
+    return {
+        type: types.eventLoaded,
+        payload: events
+    };
+
+};
