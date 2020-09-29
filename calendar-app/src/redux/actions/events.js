@@ -1,4 +1,5 @@
 import { fetchConToken } from "../../helpers/fetch";
+import { prepareEvents } from "../../helpers/prepareEvents";
 import { types } from "../types/types";
 
 /* ***** Acciones de CELENDAR: Events ***** */
@@ -80,10 +81,11 @@ export const eventStartLoaded = () => {
 
             const resp = await fetchConToken('events');
             const body = await resp.json();
-            console.log(body);
+            // console.log(body);
             if (!body.ok) throw new Error('No se pudo realizar la petición');
 
-            const events = body.eventos;
+            const events = prepareEvents(body.eventos);
+            console.log(events);
             dispatch(eventLoaded(events));
 
         } catch (error) {
