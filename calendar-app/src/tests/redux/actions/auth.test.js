@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import Swal from 'sweetalert2';
-import { startLogin, startRegister } from '../../../redux/actions/auth';
+import { startChecking, startLogin, startRegister } from '../../../redux/actions/auth';
 import { types } from '../../../redux/types/types';
 import * as fetchModule from './../../../helpers/fetch';
 
@@ -17,7 +17,7 @@ const mockStore = configureStore(middlewares);
 
 const initState = {};
 let store = mockStore(initState);
-let token;
+let token = '';
 
 Storage.prototype.setItem = jest.fn();
 
@@ -94,6 +94,37 @@ describe('Pruebas en las acciones del Auth', () => {
 
         expect(localStorage.setItem).toHaveBeenCalledWith('token', 'ABC123ABC123');
         expect(localStorage.setItem).toHaveBeenCalledWith('token-init-date', expect.any(Number));
+
+    });
+
+    test('startChecking correcto', async() => {
+
+        fetchModule.fetchConToken = jest.fn(() => {
+            return {
+                json() {
+                    return {
+                        ok: true,
+                        uid: '123',
+                        name: 'casandra',
+                        token: 'ABC123ABC123'
+                    }
+                }
+            }
+        });
+
+        await store.dispatch(startChecking());
+        const actions = store.getActions();
+        // console.log(actions);
+
+        expect(actions[0]).toEqual({
+            type: types.authLogin,
+            payload: {
+                uid: '123',
+                name: 'casandra'
+            }
+        });
+
+        expect(localStorage.setItem).toHaveBeenCalledWith('token', 'ABC123ABC123');
 
     });
 
