@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import '@testing-library/jest-dom';
-import { MemoryRouter, Route } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { LoginScreen } from '../../../components/auth/LoginScreen';
 import { startLogin } from '../../../redux/actions/auth';
 
@@ -59,7 +59,6 @@ describe('Pruebas en <LoginScreen />', () => {
 
         expect(startLogin).toHaveBeenCalledWith('emasesosos2@msn.com', '123456');
 
-    });
-    
+    });    
 
 });

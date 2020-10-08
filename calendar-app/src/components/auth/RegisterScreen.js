@@ -22,7 +22,7 @@ export const RegisterScreen = () => {
 
     const handleRegister = (e) => {
         e.preventDefault();
-
+        // console.log(formValues);
         if(password1.length < 6) {
             return Swal.fire('Error', 'La contraseña debe de ser de al menos 6 caracteres', 'error');
         }
